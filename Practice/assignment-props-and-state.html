@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My First React App</title>
+  </head>
+
+  <body>
+
+    <div id="app"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.1.0/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.1.0/umd/react-dom.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+    <script type="text/babel">
+
+        class Meet extends React.Component {
+            constructor(props) {
+            super(props);
+            this.state = { seconds: 0 };
+            }
+
+            tick() {
+                this.setState(prevState => ({
+                    seconds: prevState.seconds + 1
+                }));
+            }
+
+            componentDidMount() {
+                this.interval = setInterval(() => this.tick(), 1000);
+            }
+
+            componentWillUnmount() {
+                clearInterval(this.interval);
+            }
+                
+            render() {
+                return (
+                    <div>
+                        <h1>So nice to meet you!</h1>
+                        <h4>It's been {this.state.seconds} since we met.</h4>
+                    </div>
+                );
+            }
+        }
+        
+        ReactDOM.render(
+            <Meet />, document.getElementById('app')
+        );
